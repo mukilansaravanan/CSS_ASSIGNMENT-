@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Diet &amp; Performance Tracker | Spider-Gym Riga</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="subpage-wrapper">
+    <header class="header">
+      <div class="brand"><span class="spider-dot"></span> SPIDER-GYM RIGA</div>
+      <nav class="global-nav">
+        <a href="hw2.html">Home</a>
+        <a href="anatomy.html">Body Anatomy</a>
+        <a href="tracker.html">Member Tracker</a>
+      </nav>
+      <div class="tools"><span class="tag">SUBSCRIBER PORTAL</span></div>
+    </header>
+
+    <section class="subpage-hero">
+      <span class="tag">ACTIVE MEMBERSHIP • RIGA, LATVIA</span>
+      <h1>Daily Diet &amp; Lift Performance Tracker</h1>
+      <p>Log your daily nutrition macros and track progressive overload weights in real time.</p>
+    </section>
+
+    <main class="tracker-grid">
+      <!-- DIET TRACKER -->
+      <section class="tracker-panel">
+        <span class="tag">NUTRITION LOG</span>
+        <h2>Daily Diet &amp; Macros</h2>
+        <div class="form-row">
+          <input type="text" id="mealName" placeholder="Meal (e.g. Chicken &amp; Rice)">
+          <input type="number" id="mealCals" placeholder="Calories (kcal)">
+          <input type="number" id="mealProt" placeholder="Protein (g)">
+          <button class="neon-btn" onclick="addMeal()">+ Add Meal</button>
+        </div>
+        <div class="stats-bar">
+          <span>Total Calories: <strong id="totalCals">0</strong> kcal</span>
+          <span>Total Protein: <strong id="totalProt">0</strong> g</span>
+        </div>
+        <ul id="mealList" class="log-list"></ul>
+      </section>
+
+      <!-- WORKOUT PERFORMANCE TRACKER -->
+      <section class="tracker-panel">
+        <span class="tag">STRENGTH LOG</span>
+        <h2>Workout Performance &amp; PRs</h2>
+        <div class="form-row">
+          <input type="text" id="liftName" placeholder="Exercise (e.g. Bench Press)">
+          <input type="number" id="liftWeight" placeholder="Weight (kg)">
+          <input type="number" id="liftReps" placeholder="Reps">
+          <button class="neon-btn" onclick="addLift()">+ Log Set</button>
+        </div>
+        <ul id="liftList" class="log-list"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 Spider-Gym • Brīvības iela 45, Riga, Latvia | Owner: <strong>Mukilan Saravanan</strong></p>
+    </footer>
+  </div>
+
+  <script>
+    let totalCals = 0;
+    let totalProt = 0;
+
+    function addMeal() {
+      const name = document.getElementById("mealName").value.trim();
+      const cals = parseInt(document.getElementById("mealCals").value) || 0;
+      const prot = parseInt(document.getElementById("mealProt").value) || 0;
+      if (!name) return;
+
+      totalCals += cals;
+      totalProt += prot;
+      document.getElementById("totalCals").textContent = totalCals;
+      document.getElementById("totalProt").textContent = totalProt;
+
+      const li = document.createElement("li");
+      li.textContent = `${name} — ${cals} kcal | ${prot}g protein`;
+      document.getElementById("mealList").appendChild(li);
+
+      document.getElementById("mealName").value = "";
+      document.getElementById("mealCals").value = "";
+      document.getElementById("mealProt").value = "";
+    }
+
+    function addLift() {
+      const name = document.getElementById("liftName").value.trim();
+      const weight = document.getElementById("liftWeight").value;
+      const reps = document.getElementById("liftReps").value;
+      if (!name || !weight || !reps) return;
+
+      const li = document.createElement("li");
+      li.textContent = `${name}: ${weight} kg × ${reps} reps`;
+      document.getElementById("liftList").appendChild(li);
+
+      document.getElementById("liftName").value = "";
+      document.getElementById("liftWeight").value = "";
+      document.getElementById("liftReps").value = "";
+    }
+  </script>
+
+</body>
+</html>
